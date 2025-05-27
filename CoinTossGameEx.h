@@ -27,6 +27,8 @@ public:
 	int InputMenuNum(void);	//메뉴선택
 	void InputFile(void);	//게임 통계 파일저장
 	void ShowMenu(void);	//메뉴창
+	CoinType inputCoin(void);	//코인입력
+	CoinType randCoin(void);	//랜덤코인
 private:
 	int nTotalScore = 0;	//점수 변수
 	int nTotalTry = 0;	//시행횟수변수
@@ -38,8 +40,7 @@ private:
 	std::vector<char> vUserInput;
 
 	
-	CoinType inputCoin(void);	//코인입력
-	CoinType randCoin(void);	//랜덤코인
+
 
 protected:
 
