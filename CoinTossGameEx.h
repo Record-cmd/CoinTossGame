@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-enum class CoinType//enum class: ¿­°ÅÇü Å¬·¡½º Á¢±ÙÇÒ‹š CoinType::CT_BACKµîÀ» »ç¿ë
+enum class CoinType//enum class: ì—´ê±°í˜• í´ë˜ìŠ¤ ì ‘ê·¼í• Â‹Âš CoinType::CT_BACKë“±ì„ ì‚¬ìš©
 {
 	CT_BACK = 0, CT_FRONT, CT_NULL, CT_ERR
 };	//CT_FRONT = 1, CT_FRONT= 2
@@ -19,26 +19,28 @@ public:
 	~CoinTossGameEx(void) {}
 
 	void play(void);
+	void showLogo(void);	//ë¡œê³ ì¶œë ¥
+	void WinRate(void);//ìŠ¹ë¥ ì¶œë ¥
+	void checkCoin(CoinType nInput, CoinType nRand);	//ì½”ì¸ì •ë‹µì²´í¬
+	void GamePlay(void);	//ë™ì „ê²Œì„ ë¶€ë¶„
+	void InputName(void);	//ê²Œì„ì‹œì‘ì‹œ ì´ë¦„ì„ ì…ë ¥ë°›ìŒ
+	int InputMenuNum(void);	//ë©”ë‰´ì„ íƒ
+	void InputFile(void);	//ê²Œì„ í†µê³„ íŒŒì¼ì €ì¥
+	void ShowMenu(void);	//ë©”ë‰´ì°½
 private:
-	int nTotalScore = 0;	//Á¡¼ö º¯¼ö
-	int nTotalTry = 0;	//½ÃÇàÈ½¼öº¯¼ö
-	int nTotalWin = 0;	//¸ÂÃáÈ½¼ö
-	int nMenuNum = 0;	//¸Ş´º¼±ÅÃº¯¼ö
-	double dbWinRate = 0.0;	//½Â·üº¯¼ö
-	int nBetting = 0;	//º£ÆÃ º¯¼ö
+	int nTotalScore = 0;	//ì ìˆ˜ ë³€ìˆ˜
+	int nTotalTry = 0;	//ì‹œí–‰íšŸìˆ˜ë³€ìˆ˜
+	int nTotalWin = 0;	//ë§ì¶˜íšŸìˆ˜
+	int nMenuNum = 0;	//ë©”ë‰´ì„ íƒë³€ìˆ˜
+	double dbWinRate = 0.0;	//ìŠ¹ë¥ ë³€ìˆ˜
+	int nBetting = 0;	//ë² íŒ… ë³€ìˆ˜
 	std::string strName;
 	std::vector<char> vUserInput;
 
-	void showLogo(void);	//·Î°íÃâ·Â
-	CoinType inputCoin(void);	//ÄÚÀÎÀÔ·Â
-	CoinType randCoin(void);	//·£´ıÄÚÀÎ
-	void WinRate(void);//½Â·üÃâ·Â
-	void checkCoin(CoinType nInput, CoinType nRand);	//ÄÚÀÎÁ¤´äÃ¼Å©
-	void GamePlay(void);	//µ¿Àü°ÔÀÓ ºÎºĞ
-	void InputName(void);	//°ÔÀÓ½ÃÀÛ½Ã ÀÌ¸§À» ÀÔ·Â¹ŞÀ½
-	int InputMenuNum(void);	//¸Ş´º¼±ÅÃ
-	void InputFile(void);	//°ÔÀÓ Åë°è ÆÄÀÏÀúÀå
-	void ShowMenu(void);	//¸Ş´ºÃ¢
+	
+	CoinType inputCoin(void);	//ì½”ì¸ì…ë ¥
+	CoinType randCoin(void);	//ëœë¤ì½”ì¸
+
 protected:
 
 };
@@ -57,18 +59,18 @@ inline void CoinTossGameEx::play(void)
 		MenuNum = InputMenuNum();
 		switch (MenuNum)
 		{
-		case 1: //°ÔÀÓ½ÃÀÛ
+		case 1: //ê²Œì„ì‹œì‘
 		{
 			InputName();
-			cout << "°ÔÀÓÁß ½ºÆäÀÌ½º¹Ù¸¦ ´©¸£¸é °ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù." << endl;
+			cout << "ê²Œì„ì¤‘ ìŠ¤í˜ì´ìŠ¤ë°”ë¥¼ ëˆ„ë¥´ë©´ ê²Œì„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤." << endl;
 			GamePlay();
 			break;
 		}
-		case 2:	//°ÔÀÓÅë°è Ãâ·Â
+		case 2:	//ê²Œì„í†µê³„ ì¶œë ¥
 		{
 			mglib::settextcol(mglib::WHITE);
-			cout << "(1)Àü°ÔÀÓ¿¡¼­ ¼±ÅÃÇÑ ¹øÈ£ Ãâ·Â, (2)»ç¿ëÀÚº° ÀüÀû Ãâ·Â" << endl;
-			cout << "º¸°í½ÍÀº Åë°è¹øÈ£¸¦ ¼±ÅÃÇÏ¼¼¿ä : " << endl;
+			cout << "(1)ì „ê²Œì„ì—ì„œ ì„ íƒí•œ ë²ˆí˜¸ ì¶œë ¥, (2)ì‚¬ìš©ìë³„ ì „ì  ì¶œë ¥" << endl;
+			cout << "ë³´ê³ ì‹¶ì€ í†µê³„ë²ˆí˜¸ë¥¼ ì„ íƒí•˜ì„¸ìš” : " << endl;
 			MenuNum = InputMenuNum();
 			int j = 1;
 			switch (MenuNum)
@@ -76,29 +78,29 @@ inline void CoinTossGameEx::play(void)
 			case 1:
 				for (auto i : vUserInput)
 				{
-					cout << j <<"¹øÂ° ¼±ÅÃ: " << i << ", "<< endl;
+					cout << j <<"ë²ˆì§¸ ì„ íƒ: " << i << ", "<< endl;
 					j++;
 				}
 				cout << endl;
 				break;
 			case 2:
-				ifstream file("°ÔÀÓÅë°è.txt");
+				ifstream file("ê²Œì„í†µê³„.txt");
 				while (1)
 				{
 					getline(file, str);
 					cout << str << endl;
-					if (str == "")	//ÆÄÀÏ¿¡ ´õÀÌ»ó ¹®ÀÚ°¡¾øÀ¸¸é
+					if (str == "")	//íŒŒì¼ì— ë”ì´ìƒ ë¬¸ìê°€ì—†ìœ¼ë©´
 					{
-						break;	//ºüÁ®³ª¿È
+						break;	//ë¹ ì ¸ë‚˜ì˜´
 					}
 				}
 			}
 
 			break;
 		}
-		case 3://ÇÁ·Î±×·¥Á¾·á
+		case 3://í”„ë¡œê·¸ë¨ì¢…ë£Œ
 		{
-			exit(0);	//ÇÁ·Î±×·¥ Á¾·á
+			exit(0);	//í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 		}
 		}
 	}
@@ -111,7 +113,7 @@ inline void CoinTossGameEx::showLogo(void)
 	using namespace mglib;
 	settextcol(GREEN);
 	cout << "======================================" << endl;
-	cout << "[µ¿Àü ´øÁö±â °ÔÀÓ]" << endl << "°³¹ßÀÚ : ÃÖÁøÈ¯" << endl;
+	cout << "[ë™ì „ ë˜ì§€ê¸° ê²Œì„]" << endl << "ê°œë°œì : ìµœì§„í™˜" << endl;
 	cout << "======================================" << endl;
 }
 
@@ -120,32 +122,32 @@ inline CoinType CoinTossGameEx::inputCoin(void)
 	using namespace mglib;
 	using namespace std;
 	settextcol(GREEN);
-	cout << "µ¿Àü ¾Õ¸é(F)ÀÌ³ª µŞ¸é(B)À» ¼±ÅÃÇÏ¼¼¿ä." << endl;	//¹®ÀÚ¿­ Ãâ·Â(string)
+	cout << "ë™ì „ ì•ë©´(F)ì´ë‚˜ ë’·ë©´(B)ì„ ì„ íƒí•˜ì„¸ìš”." << endl;	//ë¬¸ìì—´ ì¶œë ¥(string)
 	settextcol(WHITE);
-	cout << "´ç½ÅÀÇ ¼±ÅÃÀº? ";
+	cout << "ë‹¹ì‹ ì˜ ì„ íƒì€? ";
 	char cInput = _getche();
 	settextcol(GREEN);
 	if (cInput == 'F' || cInput == 'f')
 	{
 		vUserInput.push_back(cInput);
-		cout << endl << "¾Õ¸éÀ» ¼±ÅÃÇß½À´Ï´Ù." << endl;	//¹®ÀÚ¿­(string)Ãâ·Â; <<: ½ºÆ®¸² cout¿¡ Ãâ·ÂÇÏ´Â ±âÈ£ cout(consol output) endl(end of line ¿£ÅÍ Å°)
+		cout << endl << "ì•ë©´ì„ ì„ íƒí–ˆìŠµë‹ˆë‹¤." << endl;	//ë¬¸ìì—´(string)ì¶œë ¥; <<: ìŠ¤íŠ¸ë¦¼ coutì— ì¶œë ¥í•˜ëŠ” ê¸°í˜¸ cout(consol output) endl(end of line ì—”í„° í‚¤)
 		return CoinType::CT_FRONT;
 	}
 	else if (cInput == 'B' || cInput == 'b')
 	{
 		vUserInput.push_back(cInput);
-		cout << endl << "µŞ¸éÀ» ¼±ÅÃÇß½À´Ï´Ù." << endl;
+		cout << endl << "ë’·ë©´ì„ ì„ íƒí–ˆìŠµë‹ˆë‹¤." << endl;
 		return CoinType::CT_BACK;
 	}
 	else if (cInput == ' ')
 	{
-		cout << "ÇöÁ¦ °ÔÀÓ Åë°è¸¦ ÀúÀåÇÏ°í °ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù." << endl;
+		cout << "í˜„ì œ ê²Œì„ í†µê³„ë¥¼ ì €ì¥í•˜ê³  ê²Œì„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤." << endl;
 		return CoinType::CT_NULL;
 	}
 	else
 	{
 		settextcol(RED);
-		cout << endl << "Àß¸øÀÔ·ÂÇß½À´Ï´Ù." << endl;
+		cout << endl << "ì˜ëª»ì…ë ¥í–ˆìŠµë‹ˆë‹¤." << endl;
 		return CoinType::CT_ERR;
 	}
 }
@@ -155,26 +157,26 @@ inline CoinType CoinTossGameEx::randCoin(void)
 	using namespace std;
 	using namespace mglib;
 	settextcol(BLUE);
-	cout << "¾Æ¹«Å°³ª ´©¸£¸é µ¿ÀüÀ» ´øÁı´Ï´Ù." << endl;
-	_getch();	//±ÛÀÚ ÇÑ ÀÚ(char)ÀÔ·Â;
-	int nRand = randrange(0, 2);	//(0,2-1)¹üÀ§¿¡¼­ Á¤¼ö ³­¼ö ¹ß»ı
+	cout << "ì•„ë¬´í‚¤ë‚˜ ëˆ„ë¥´ë©´ ë™ì „ì„ ë˜ì§‘ë‹ˆë‹¤." << endl;
+	_getch();	//ê¸€ì í•œ ì(char)ì…ë ¥;
+	int nRand = randrange(0, 2);	//(0,2-1)ë²”ìœ„ì—ì„œ ì •ìˆ˜ ë‚œìˆ˜ ë°œìƒ
 	nTotalTry++;
 	CoinType nRandCoin = (CoinType)nRand;
 	if (nRandCoin == CoinType::CT_BACK)
 	{
-		cout << "³ª¿Â µ¿ÀüÀº µŞ¸éÀÔ´Ï´Ù." << endl;
+		cout << "ë‚˜ì˜¨ ë™ì „ì€ ë’·ë©´ì…ë‹ˆë‹¤." << endl;
 	}
-	else cout << "³ª¿Â µ¿ÀüÀº ¾Õ¸éÀÔ´Ï´Ù." << endl;
+	else cout << "ë‚˜ì˜¨ ë™ì „ì€ ì•ë©´ì…ë‹ˆë‹¤." << endl;
 	return nRandCoin;
 }
 
 inline void CoinTossGameEx::WinRate(void)
 {
 		using namespace std;
-		cout << "½Â·üÀº" << nTotalWin / (double)nTotalTry * 100 << "%ÀÔ´Ï´Ù." << endl;// ½Â·ü Ãâ·Â
-		cout << "ÃÑ ½ÃÇà È½¼ö: " << nTotalTry << endl;
-		cout << "ÃÑ ¸ÂÃá È½¼ö: " << nTotalWin << endl;
-		cout << "º£ÆÃ ·®: " << nBetting << endl;
+		cout << "ìŠ¹ë¥ ì€" << nTotalWin / (double)nTotalTry * 100 << "%ì…ë‹ˆë‹¤." << endl;// ìŠ¹ë¥  ì¶œë ¥
+		cout << "ì´ ì‹œí–‰ íšŸìˆ˜: " << nTotalTry << endl;
+		cout << "ì´ ë§ì¶˜ íšŸìˆ˜: " << nTotalWin << endl;
+		cout << "ë² íŒ… ëŸ‰: " << nBetting << endl;
 		dbWinRate = nTotalWin / (double)nTotalTry * 100;
 }
 
@@ -186,20 +188,20 @@ inline void CoinTossGameEx::checkCoin(CoinType nInput, CoinType nRand)
 		if (nInput == nRand)
 		{
 			settextcol(RED);
-			cout << "Àß Çß½À´Ï´Ù. µ¿ÀüÀ» ¸ÂÃß¾ú½À´Ï´Ù." << endl;
+			cout << "ì˜ í–ˆìŠµë‹ˆë‹¤. ë™ì „ì„ ë§ì¶”ì—ˆìŠµë‹ˆë‹¤." << endl;
 			nTotalScore++;
-			nTotalWin++;	//¸ÂÃáÈ½¼ö Ãß°¡
+			nTotalWin++;	//ë§ì¶˜íšŸìˆ˜ ì¶”ê°€
 			nBetting++;
 		}
-		else //COinTypeÀÌ ´Ù¸§
+		else //COinTypeì´ ë‹¤ë¦„
 		{
 			settextcol(BLUE);
-			cout << endl << "¾Æ½±³×¿ä. µ¿Àü ¼±ÅÃÀÌ Æ²·È½À´Ï´Ù." << endl;
+			cout << endl << "ì•„ì‰½ë„¤ìš”. ë™ì „ ì„ íƒì´ í‹€ë ¸ìŠµë‹ˆë‹¤." << endl;
 			nTotalScore--;
 			nBetting--;
 		}
 		settextcol(YELLOW);
-		cout << "ÇöÀç ½ºÄÚ¾î´Â " << nTotalScore << "ÀÔ´Ï´Ù." << endl << endl;
+		cout << "í˜„ì¬ ìŠ¤ì½”ì–´ëŠ” " << nTotalScore << "ì…ë‹ˆë‹¤." << endl << endl;
 	
 }
 
@@ -208,28 +210,28 @@ inline void CoinTossGameEx::GamePlay(void)
 	using namespace std;
 	mglib::randseed();
 	mglib::settextcol(mglib::BLUE);
-	cout << "¾ó¸¶³ª º£ÆÃÇÏ½Ã°Ú½À´Ï±î? : " << endl;
+	cout << "ì–¼ë§ˆë‚˜ ë² íŒ…í•˜ì‹œê² ìŠµë‹ˆê¹Œ? : " << endl;
 	cin >> nBetting;
 	mglib::settextcol(mglib::RED);
-	cout << nBetting << "¸¸Å­ º£ÆÃÇß½À´Ï´Ù." << endl;
+	cout << nBetting << "ë§Œí¼ ë² íŒ…í–ˆìŠµë‹ˆë‹¤." << endl;
 	mglib::settextcol(mglib::BLUE);
-	cout << "ÃÊ±â µæÁ¡À» ·£´ıÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù." << endl;
+	cout << "ì´ˆê¸° ë“ì ì„ ëœë¤ìœ¼ë¡œ ì„¤ì •í•©ë‹ˆë‹¤." << endl;
 
 	nTotalScore = mglib::randrange(0, 10);
 	mglib::settextcol(mglib::RED);
-	cout << "ÃÊ±âµæÁ¡Àº " << nTotalScore << "Á¡ ÀÔ´Ï´Ù." << endl;
+	cout << "ì´ˆê¸°ë“ì ì€ " << nTotalScore << "ì  ì…ë‹ˆë‹¤." << endl;
 	mglib::settextcol(mglib::WHITE);
 	while (1)
 	{
 		CoinType cInput = inputCoin();
-		if (cInput == CoinType::CT_ERR)	//Àß¸øµÈ ¹®ÀÚ ÀÔ·Â½Ã ´Ù½Ã ÀÔ·Â¹ŞÀ½
+		if (cInput == CoinType::CT_ERR)	//ì˜ëª»ëœ ë¬¸ì ì…ë ¥ì‹œ ë‹¤ì‹œ ì…ë ¥ë°›ìŒ
 		{
 			continue;
 		}
-		if (cInput == CoinType::CT_NULL)	//½ºÆäÀÌ½º¹Ù ´©¸¦½Ã ºüÁ®³ª°¨
+		if (cInput == CoinType::CT_NULL)	//ìŠ¤í˜ì´ìŠ¤ë°” ëˆ„ë¥¼ì‹œ ë¹ ì ¸ë‚˜ê°
 		{
 			InputFile();
-			break;	//ºüÁ®³ª°¨
+			break;	//ë¹ ì ¸ë‚˜ê°
 		}
 		CoinType nRand = randCoin();
 		checkCoin(cInput, nRand);
@@ -242,7 +244,7 @@ inline void CoinTossGameEx::GamePlay(void)
 inline void CoinTossGameEx::InputName(void)
 {
 	using namespace std;
-	cout << "ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : " << endl;
+	cout << "ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : " << endl;
 	cin >> strName;
 }
 
@@ -256,20 +258,20 @@ inline int CoinTossGameEx::InputMenuNum(void)
 inline void CoinTossGameEx::InputFile(void)
 {
 	using namespace std;
-	ofstream file("°ÔÀÓÅë°è.txt", ios::app);
+	ofstream file("ê²Œì„í†µê³„.txt", ios::app);
 	file << "=======================================" << endl;
-	file << "ÀÌ¸§ : " << strName << endl;
-	file << "½ÃÇà È½¼ö : " << nTotalTry << "¹®Á¦" << endl;
-	file << "¸ÂÃá È½¼ö : " << nTotalWin << "¹ø" << endl;
-	file << "Á¡¼ö : " << nTotalScore << std::endl;
-	file << "½Â·ü : " << dbWinRate << "%" << endl;
-	file << "ÃÖÁ¾º£ÆÃ : " << nBetting << endl;
+	file << "ì´ë¦„ : " << strName << endl;
+	file << "ì‹œí–‰ íšŸìˆ˜ : " << nTotalTry << "ë¬¸ì œ" << endl;
+	file << "ë§ì¶˜ íšŸìˆ˜ : " << nTotalWin << "ë²ˆ" << endl;
+	file << "ì ìˆ˜ : " << nTotalScore << std::endl;
+	file << "ìŠ¹ë¥  : " << dbWinRate << "%" << endl;
+	file << "ìµœì¢…ë² íŒ… : " << nBetting << endl;
 }
 
 inline void CoinTossGameEx::ShowMenu(void)
 {
 	using namespace std;
 	mglib::settextcol(mglib::WHITE);
-	cout << "(1)°ÔÀÓ½ÃÀÛ, (2)°ÔÀÓÅë°è, (3)°ÔÀÓÁ¾·á" << endl;
-	cout << "¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä : " << endl;
+	cout << "(1)ê²Œì„ì‹œì‘, (2)ê²Œì„í†µê³„, (3)ê²Œì„ì¢…ë£Œ" << endl;
+	cout << "ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” : " << endl;
 }
